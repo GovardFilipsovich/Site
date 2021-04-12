@@ -1,0 +1,19 @@
+H1 {
+  color:#ffffff;
+  background-color: #55e015;
+}
+.Reg_Form {
+  text-align: right;
+}
+body {
+  background-color: #55f015;
+}
+input {
+  background-color: #a000e0;
+  border-block-color: #500050;
+  border-radius: 7px;
+  color: #ffffff;
+}
+.Settings {
+  text-align: left;
+}
