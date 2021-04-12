@@ -27,6 +27,10 @@ def signin():
     if request.method == "GET":
         return render_template("signin.html")
 
+@app.route("/<Username>/profile")
+def profile(Username):
+    return render_template("profile.html")
+
 
 if __name__ == '__main__':
     app.run(port=8080, host='127.0.0.1')
