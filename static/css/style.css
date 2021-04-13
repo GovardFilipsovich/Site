@@ -8,12 +8,33 @@ H1 {
 body {
   background-color: #55f015;
 }
+html, body, .container{
+	height: 100%;
+	width: 100%
+}
+.Menu {
+	position: absolute;
+}
 input {
   background-color: #a000e0;
   border-block-color: #500050;
   border-radius: 7px;
   color: #ffffff;
+  cursor: pointer;
 }
 .Settings {
-  text-align: left;
+  display: inline-block;
+  border: 0px;
+  position: absolute;
+  left:1%;
+  top:8%;
+}
+.Settings button {
+	text-align: center;
+	border: 1px solid #000;
+	*border: 0px;
+	background: none;
+	cursor: pointer;
+	padding: 15px 15px 15px;
+	color: red;
 }
