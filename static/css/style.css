@@ -4,6 +4,7 @@ H1 {
 }
 .Reg_Form {
   text-align: right;
+  width: 99%;
 }
 body {
   background-color: #55f015;
@@ -18,7 +19,7 @@ html, body, .container{
 	top:8%;
 	background-color:aliceblue;
 }
-input {
+.Reg_Form input {
   background-color: #a000e0;
   border-block-color: #500050;
   border-radius: 7px;
@@ -33,6 +34,15 @@ input {
   top:8%;
 }
 .Settings button {
+	text-align: center;
+	border: 1px solid #000;
+	*border: 0px;
+	background: none;
+	cursor: pointer;
+	padding: 7px 7px 7px;
+	color: red;
+}
+#submit{
 	text-align: center;
 	border: 1px solid #000;
 	*border: 0px;

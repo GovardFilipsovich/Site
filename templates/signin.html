@@ -2,9 +2,23 @@
 
 {% block content %}
 
-
-<center>
-    Вход
-</center>
+<form action="" method="post" novalidate>
+        <div>
+            {{ form.csrf_token }}
+        </div>
+        <center>
+            {% for field in form if field.name != 'csrf_token' %}
+                <div>
+                    {% if field.name != 'submit' %}
+                        {{ field.label() }} <br>
+                    {% endif %}
+                    {{ field() }}
+                    {% for error in field.errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </center>
+    </form>
 
 {% endblock %}
