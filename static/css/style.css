@@ -14,6 +14,9 @@ html, body, .container{
 }
 .Menu {
 	position: absolute;
+	left: 1%;
+	top:8%;
+	background-color:aliceblue;
 }
 input {
   background-color: #a000e0;
@@ -35,6 +38,6 @@ input {
 	*border: 0px;
 	background: none;
 	cursor: pointer;
-	padding: 15px 15px 15px;
+	padding: 7px 7px 7px;
 	color: red;
 }
