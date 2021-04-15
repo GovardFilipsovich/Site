@@ -18,7 +18,6 @@ def index():
 def guest():
     global count_menu
     if request.method == "GET":
-        count_menu = 0
         return render_template("index.html", hidden="hidden")
     else:
         if list(request.form.keys())[0] == "SignUp":
@@ -42,10 +41,10 @@ def redir(Username):
 def profile(Username):
     global count_menu
     if request.method == "GET":
-        count_menu = 0
         return render_template("profile.html", name=Username, hidden="hidden",
                                functional="Для вас доступен весь функционал сайта")
     else:
+        print(count_menu)
         if list(request.form.keys())[0] == "Sett":
             if count_menu % 2 == 0:
                 count_menu += 1
@@ -62,7 +61,6 @@ def profile(Username):
 def Editor(Username):
     global count_menu
     if request.method == "GET":
-        count_menu = 0
         return render_template("editor.html", name=Username, hidden="hidden")
     else:
         if list(request.form.keys())[0] == "Sett":
