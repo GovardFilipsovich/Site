@@ -51,3 +51,11 @@ html, body, .container{
 	padding: 7px 7px 7px;
 	color: red;
 }
+
+.Drawer {
+	background-color: white;
+	width: 50%;
+	height: 80%;
+	position: relative;
+	left: 25%;
+}
