@@ -85,8 +85,12 @@
     </div>
     <input type="submit" name="Name" value="{{name}}"> <br>
 </form>
-<canvas class="Drawer"></canvas>
-
+<canvas class="Drawer" id="Canvas">Привет</canvas>
+<script>
+    var example = document.getElementById("Canvas"),
+        ctx     = example.getContext('2d');
+    ctx.fillRect(0, 0, example.width, example.height);
+</script>
 
 {% endblock %}
 
