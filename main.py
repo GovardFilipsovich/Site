@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 from loginform import LoginForm
 from regform import RegForm
+from Editor import Editor
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'AllanGregoryPrimaryKey'
@@ -32,6 +33,7 @@ def guest():
                 count_menu += 1
                 return render_template("index.html", hidden="hidden")
 
+
 @app.route("/<Username>/", methods=["GET", "POST"])
 def redir(Username):
     return redirect(f"/{Username}/profile")
@@ -58,20 +60,26 @@ def profile(Username):
 
 
 @app.route("/<Username>/profile/Editor", methods=["GET", "POST"])
-def Editor(Username):
+def page_editor(Username):
     global count_menu
+    func = ""
     if request.method == "GET":
-        return render_template("editor.html", name=Username, hidden="hidden")
+        return render_template("editor.html", name=Username, hidden="hidden", func=func)
     else:
         if list(request.form.keys())[0] == "Sett":
             if count_menu % 2 == 0:
                 count_menu += 1
-                return render_template("editor.html", hidden="", name=Username)
+                return render_template("editor.html", hidden="", name=Username, func=func)
             else:
                 count_menu += 1
-                return render_template("editor.html", hidden="hidden", name=Username)
+                return render_template("editor.html", hidden="hidden", name=Username, func=func)
         elif list(request.form.keys())[0] == "Name":
             return redirect(f"/{Username}/")
+        elif list(request.form.keys())[0] == "but5":
+            src = url_for('static', filename='img/start.png')
+
+            func = "Img.onload = function() {\nctx.drawImage(Img, 100, 80);\n}"
+            return render_template("editor.html", hidden="hidden", name=Username, func=func, img=src)
 
 
 @app.route('/reg', methods=["GET", "POST"])

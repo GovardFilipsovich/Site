@@ -85,11 +85,36 @@
     </div>
     <input type="submit" name="Name" value="{{name}}"> <br>
 </form>
+
 <canvas class="Drawer" id="Canvas">Привет</canvas>
+<select id="Choise">
+    <option selected>Начало</option>
+    <option>Конец</option>
+    <option>Условие</option>
+    <option>Цикл</option>
+    <option>Ввод/вывод</option>
+    <option>Объявление</option>
+</select>
+<form method="post">
+    <object class="Manager" width="10%" height="14%">
+        <button id="but1">1</button>
+        <button id="but2">2</button>
+        <button id="but3">3</button>
+        <button id="but4">4</button>
+        <button id="but5" name="but5">5</button>
+</object>
+</form>
+
 <script>
     var example = document.getElementById("Canvas"),
-        ctx     = example.getContext('2d');
-    ctx.fillRect(0, 0, example.width, example.height);
+        ctx = example.getContext('2d');
+    example.height = 750;
+	example.width  = 650;
+	var Img = new Image();
+    Img.src = '{{img}}';
+    {{func}};
+    ctx.stroke();
+
 </script>
 
 {% endblock %}

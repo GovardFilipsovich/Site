@@ -42,7 +42,7 @@ html, body, .container{
 	padding: 7px 7px 7px;
 	color: red;
 }
-#submit{
+#submit {
 	text-align: center;
 	border: 1px solid #000;
 	*border: 0px;
@@ -58,4 +58,44 @@ html, body, .container{
 	height: 80%;
 	position: relative;
 	left: 25%;
+}
+.Manager {
+	position:absolute;
+	left:10%;
+	top: 60%;
+}
+.Manager button{
+	text-align: center;
+	border: 1px solid #000;
+	*border: 0px;
+	background: none;
+	cursor: pointer;
+	padding: 7px 7px 7px;
+	color: red;
+	position:absolute;
+}
+#but1{
+	left: 50%;
+	top: 0%;
+}
+#but2{
+	left: 50%;
+	top: 100%;
+}
+#but3{
+	left: 0%;
+	top: 50%;
+}
+#but4{
+	left: 100%;
+	top: 50%;
+}
+#but5{
+	left: 50%;
+	top: 50%;
+}
+#Choise{
+	position: absolute;
+	left:10%;
+	top: 55%;
 }
