@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for
 from loginform import LoginForm
 from regform import RegForm
-from Editor import Editor
+from Editor import Editor, Start
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'AllanGregoryPrimaryKey'
+
+with open("static/js/editor-script.js", "w") as file:
+    pass
 
 count_menu = 0
 
@@ -46,7 +49,6 @@ def profile(Username):
         return render_template("profile.html", name=Username, hidden="hidden",
                                functional="Для вас доступен весь функционал сайта")
     else:
-        print(count_menu)
         if list(request.form.keys())[0] == "Sett":
             if count_menu % 2 == 0:
                 count_menu += 1
@@ -63,6 +65,7 @@ def profile(Username):
 def page_editor(Username):
     global count_menu
     func = ""
+    editor = Editor()
     if request.method == "GET":
         return render_template("editor.html", name=Username, hidden="hidden", func=func)
     else:
@@ -75,11 +78,15 @@ def page_editor(Username):
                 return render_template("editor.html", hidden="hidden", name=Username, func=func)
         elif list(request.form.keys())[0] == "Name":
             return redirect(f"/{Username}/")
-        elif list(request.form.keys())[0] == "but5":
-            src = url_for('static', filename='img/start.png')
-
-            func = "Img.onload = function() {\nctx.drawImage(Img, 100, 80);\n}"
-            return render_template("editor.html", hidden="hidden", name=Username, func=func, img=src)
+        elif list(request.form.keys())[0] == "but5" or list(request.form.keys())[0] == "List":
+            if request.form.get("List") == "Начало":
+                with open("static/js/editor-script.js", "w") as file:
+                    start = Start((50, 50))
+                    editor.add_figure(start)
+                    file.write(editor.get_code())
+            elif request.form.get("List") == "Конец":
+                print("Конец")
+            return redirect(f"/{Username}/profile/Editor")
 
 
 @app.route('/reg', methods=["GET", "POST"])
