@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from loginform import LoginForm
 from regform import RegForm
-from Editor import Editor, Start
+from Editor import Editor, Start, End, Condition, Cycle, Input, Declar, Func
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'AllanGregoryPrimaryKey'
@@ -85,7 +85,36 @@ def page_editor(Username):
                     editor.add_figure(start)
                     file.write(editor.get_code())
             elif request.form.get("List") == "Конец":
-                print("Конец")
+                with open("static/js/editor-script.js", "w") as file:
+                    end = End((50, 50))
+                    editor.add_figure(end)
+                    file.write(editor.get_code())
+            elif request.form.get("List") == "Условие":
+                with open("static/js/editor-script.js", "w") as file:
+                    cond = Condition((50, 50))
+                    editor.add_figure(cond)
+                    file.write(editor.get_code())
+            elif request.form.get("List") == "Цикл":
+                with open("static/js/editor-script.js", "w") as file:
+                    cycle = Cycle((50, 50))
+                    editor.add_figure(cycle)
+                    file.write(editor.get_code())
+            elif request.form.get("List") == "Ввод/вывод":
+                with open("static/js/editor-script.js", "w") as file:
+                    inp = Input((50, 50))
+                    editor.add_figure(inp)
+                    file.write(editor.get_code())
+            elif request.form.get("List") == "Объявление":
+                with open("static/js/editor-script.js", "w") as file:
+                    decl = Declar((50, 50))
+                    editor.add_figure(decl)
+                    file.write(editor.get_code())
+            elif request.form.get("List") == "Функция":
+                with open("static/js/editor-script.js", "w") as file:
+                    func = Func((50, 50))
+                    editor.add_figure(func)
+                    file.write(editor.get_code())
+
             return redirect(f"/{Username}/profile/Editor")
 
 
