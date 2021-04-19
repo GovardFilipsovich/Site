@@ -8,6 +8,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'AllanGregoryPrimaryKey'
 port = 8080
 host = '127.0.0.1'
+v_num_canvas = 0
 
 with open("static/js/editor-script.js", "w") as file:
     pass
@@ -66,11 +67,10 @@ def profile(Username):
 
 @app.route("/<Username>/profile/Editor", methods=["GET", "POST"])
 def page_editor(Username):
-    global count_menu
+    global count_menu, v_num_canvas
     editor = Editor()
     if request.method == "GET":
         print("Hello")
-        requests.get("http://" + host + f":{port}" + url_for('static', filename='js/editor-script.js'))
         return render_template("editor.html", name=Username, hidden="hidden")
     else:
         if list(request.form.keys())[0] == "Sett":
