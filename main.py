@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from loginform import LoginForm
 from regform import RegForm
 from Editor import Editor, Start, End, Condition, Cycle, Input, Declar, Func
@@ -69,6 +69,7 @@ def page_editor(Username):
     if request.method == "GET":
         return render_template("editor.html", name=Username, hidden="hidden", func=func)
     else:
+        print(list(request.form.keys()))
         if list(request.form.keys())[0] == "Sett":
             if count_menu % 2 == 0:
                 count_menu += 1
@@ -78,7 +79,7 @@ def page_editor(Username):
                 return render_template("editor.html", hidden="hidden", name=Username, func=func)
         elif list(request.form.keys())[0] == "Name":
             return redirect(f"/{Username}/")
-        elif list(request.form.keys())[0] == "but5" or list(request.form.keys())[0] == "List":
+        elif list(request.form.keys())[-1] == "but5":
             if request.form.get("List") == "Начало":
                 with open("static/js/editor-script.js", "w") as file:
                     start = Start((50, 50))
@@ -114,7 +115,26 @@ def page_editor(Username):
                     func = Func((50, 50))
                     editor.add_figure(func)
                     file.write(editor.get_code())
-
+            return redirect(f"/{Username}/profile/Editor")
+        elif list(request.form.keys())[-1] == "but4":
+            editor.scheme[-1].move_right()
+            with open("static/js/editor-script.js", "w") as file:
+                file.write(editor.get_code())
+            return redirect(f"/{Username}/profile/Editor")
+        elif list(request.form.keys())[-1] == "but3":
+            editor.scheme[-1].move_left()
+            with open("static/js/editor-script.js", "w") as file:
+                file.write(editor.get_code())
+            return redirect(f"/{Username}/profile/Editor")
+        elif list(request.form.keys())[-1] == "but1":
+            editor.scheme[-1].move_up()
+            with open("static/js/editor-script.js", "w") as file:
+                file.write(editor.get_code())
+            return redirect(f"/{Username}/profile/Editor")
+        elif list(request.form.keys())[-1] == "but2":
+            editor.scheme[-1].move_down()
+            with open("static/js/editor-script.js", "w") as file:
+                file.write(editor.get_code())
             return redirect(f"/{Username}/profile/Editor")
 
 
