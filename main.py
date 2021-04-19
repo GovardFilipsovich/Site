@@ -1,10 +1,13 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for
 from loginform import LoginForm
 from regform import RegForm
 from Editor import Editor, Start, End, Condition, Cycle, Input, Declar, Func
+import requests
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'AllanGregoryPrimaryKey'
+port = 8080
+host = '127.0.0.1'
 
 with open("static/js/editor-script.js", "w") as file:
     pass
@@ -64,19 +67,19 @@ def profile(Username):
 @app.route("/<Username>/profile/Editor", methods=["GET", "POST"])
 def page_editor(Username):
     global count_menu
-    func = ""
     editor = Editor()
     if request.method == "GET":
-        return render_template("editor.html", name=Username, hidden="hidden", func=func)
+        print("Hello")
+        requests.get("http://" + host + f":{port}" + url_for('static', filename='js/editor-script.js'))
+        return render_template("editor.html", name=Username, hidden="hidden")
     else:
-        print(list(request.form.keys()))
         if list(request.form.keys())[0] == "Sett":
             if count_menu % 2 == 0:
                 count_menu += 1
-                return render_template("editor.html", hidden="", name=Username, func=func)
+                return render_template("editor.html", hidden="", name=Username)
             else:
                 count_menu += 1
-                return render_template("editor.html", hidden="hidden", name=Username, func=func)
+                return render_template("editor.html", hidden="hidden", name=Username)
         elif list(request.form.keys())[0] == "Name":
             return redirect(f"/{Username}/")
         elif list(request.form.keys())[-1] == "but5":
@@ -155,4 +158,4 @@ def signin():
 
 
 if __name__ == '__main__':
-    app.run(port=8080, host='127.0.0.1')
+    app.run(port=port, host=host)
