@@ -25,16 +25,16 @@ class Scheme_Object:
         self.code = ""
 
     def move_right(self):
-        self.point = (self.point[0] + 10, self.point[1])
+        self.point = (self.point[0] + 30, self.point[1])
 
     def move_left(self):
-        self.point = (self.point[0] - 10, self.point[1])
+        self.point = (self.point[0] - 30, self.point[1])
 
     def move_up(self):
-        self.point = (self.point[0], self.point[1] - 10)
+        self.point = (self.point[0], self.point[1] - 30)
 
     def move_down(self):
-        self.point = (self.point[0], self.point[1] + 10)
+        self.point = (self.point[0], self.point[1] + 30)
 
 
 class Start(Scheme_Object):
