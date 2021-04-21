@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from loginform import LoginForm
 from regform import RegForm
 from Editor import Editor, Start, End, Condition, Cycle, Input, Declar, Func
@@ -150,19 +150,26 @@ def page_editor(Username):
 @app.route('/reg', methods=["GET", "POST"])
 def reg():
     form = RegForm()
-    if form.validate_on_submit() and form.check_password():
+    if form.validate_on_submit() and form.check_password() and form.check_user() == None:
         user = User()
         user.name = form.username.data
         user.password = sha256(form.password.data.encode('utf-8')).hexdigest()
-        return redirect('/')
+        db_sess = db_session.create_session()
+        db_sess.add(user)
+        db_sess.commit()
+        return redirect(f'/{form.username.data}/')
+    elif form.check_user() != None:
+        flash(u"Такой пользователь уже есть", "error")
+    elif form.check_password() is False:
+        flash(u"Не совпадают пароли", "error")
     return render_template('registration.html', title='Авторизация', form=form)
 
 
 @app.route('/signin', methods=["GET", "POST"])
 def signin():
     form = LoginForm()
-    if form.validate_on_submit():
-        return redirect('/success')
+    if form.validate_on_submit() and form.is_in_db():
+        return redirect(f'/{form.get_user()}/')
     return render_template('signin.html', title='Авторизация', form=form)
 
 
